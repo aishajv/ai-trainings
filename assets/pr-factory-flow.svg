@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 380" role="img" aria-labelledby="ft fd">
   <title id="ft">The PR factory flow</title>
-  <desc id="fd">One feature flows through build-tickets-from-feature (ticket-drafter drafts tickets, issues are created) and build-prs-from-tickets (ticket-implementer builds each ticket, diff-reviewer checks it, test-runner runs make test, with fixes looping back to the implementer) and comes out as one pull request per ticket.</desc>
+  <desc id="fd">One feature flows through build-tickets-from-feature (ticket-drafter drafts tickets, issues are created) and build-prs-from-tickets (ticket-implementer builds each ticket and its Stop hook makes make test pass before it can finish; diff-reviewer and test-runner check it, and the orchestrator sends their issues back to the implementer) and comes out as one pull request per ticket.</desc>
   <defs>
     <linearGradient id="fbg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#1f1d1a"/>
@@ -27,19 +27,20 @@
   <text x="40" y="78" class="p">One feature in. Reviewed, tested pull requests out.</text>
 
   <!-- stage frames -->
-  <rect x="160" y="120" width="330" height="200" rx="14" fill="none" stroke="#3a3732" stroke-dasharray="5 5"/>
+  <rect x="160" y="120" width="330" height="225" rx="14" fill="none" stroke="#3a3732" stroke-dasharray="5 5"/>
   <text x="164" y="110" class="stage">build-tickets-from-feature</text>
-  <rect x="510" y="120" width="575" height="200" rx="14" fill="none" stroke="#3a3732" stroke-dasharray="5 5"/>
+  <rect x="510" y="120" width="575" height="225" rx="14" fill="none" stroke="#3a3732" stroke-dasharray="5 5"/>
   <text x="514" y="110" class="stage">build-prs-from-tickets</text>
 
   <!-- track -->
   <line x1="85" y1="205" x2="1135" y2="205" stroke="#2f2c28" stroke-width="2"/>
 
   <!-- fixes loops -->
-  <path id="fixA" d="M 815 173 C 790 135, 640 135, 615 173" fill="none" stroke="#5a554d" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <text x="715" y="150" text-anchor="middle" class="fx">fixes</text>
-  <path id="fixB" d="M 995 237 C 960 300, 650 300, 615 237" fill="none" stroke="#5a554d" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <text x="805" y="304" text-anchor="middle" class="fx">fixes</text>
+  <path id="selfLoop" d="M 580 173 C 565 146, 665 146, 650 173" fill="none" stroke="#d97757" stroke-width="2"/>
+  <text x="615" y="138" text-anchor="middle" class="fx" style="fill:#d97757">Stop hook: make test</text>
+  <path id="fixA" d="M 815 237 C 790 287, 640 287, 615 237" fill="none" stroke="#5a554d" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <path id="fixB" d="M 995 237 C 960 322, 650 322, 615 237" fill="none" stroke="#5a554d" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="805" y="333" text-anchor="middle" class="fx">sent back by the orchestrator</text>
 
   <!-- the traveling work item -->
   <circle r="11" fill="url(#dotglow)">
@@ -96,6 +97,11 @@
   </g>
 
 
+  <!-- Stop hook: a spark circles the implementer while it works -->
+  <circle r="5" fill="#ffb08f" opacity="0">
+    <animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.47;0.56;1" calcMode="linear"><mpath href="#selfLoop" xlink:href="#selfLoop"/></animateMotion>
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.469;0.475;0.555;0.56;1" dur="10s" repeatCount="indefinite"/>
+  </circle>
   <!-- fixes: small sparks loop back to the implementer -->
   <circle r="5" fill="#d97757" opacity="0">
     <animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.64;0.72;1" calcMode="linear"><mpath href="#fixA" xlink:href="#fixA"/></animateMotion>
