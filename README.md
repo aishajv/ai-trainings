@@ -42,7 +42,6 @@ By the end, you'll understand how to make an AI assistant work *your* way:
    ```text
    What skills, agents, and hooks does this project have?
    Explain the ticket-implementer agent in simple words.
-   What would happen if an agent tried to read the .env file?
    ```
 
 That's it. You're learning by exploring. 🎉
