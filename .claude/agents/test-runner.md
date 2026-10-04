@@ -5,12 +5,6 @@ tools: Bash, Read, Grep, Glob
 model: haiku
 skills:
   - python-fastapi-test-conventions
-hooks:
-  PreToolUse:
-    - matcher: Bash
-      hooks:
-        - type: command
-          command: "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guard-test-runner.sh"
 ---
 
 Run the test suite in the worktree the caller gives you and report the results. Nothing else.

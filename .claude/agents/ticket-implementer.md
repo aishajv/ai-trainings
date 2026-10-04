@@ -7,12 +7,6 @@ isolation: worktree
 skills:
   - python-fastapi-coding-conventions
   - python-fastapi-test-conventions
-hooks:
-  PreToolUse:
-    - matcher: Bash
-      hooks:
-        - type: command
-          command: "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-no-verify.sh"
 ---
 
 Implement exactly one ticket in your own git worktree, following the ticket text.

@@ -1,16 +1,72 @@
-# AI Trainings
+<p align="center">
+  <img src="assets/hero.svg" alt="AI Trainings: an animated Claude Code terminal turns one feature into tickets, then into a reviewed, tested pull request" width="100%">
+</p>
 
-Companion repo for the **AI Assisted Engineering** sessions: [open the sessions page](https://claude.ai/artifact/RJ8dsCQrrkQUBzuwnMJszq).
+<p align="center">
+  <a href="https://claude.ai/artifact/RJ8dsCQrrkQUBzuwnMJszq"><b>Open the sessions page</b></a> ·
+  <a href="#start-in-5-minutes">Start in 5 minutes</a> ·
+  <a href="#your-learning-path">Learning path</a> ·
+  <a href="https://github.com/aishajv/claude-everything">Install as plugins</a>
+</p>
 
-Everything here is a normal Claude Code project setup under `.claude/`: skills, subagents, hooks, and permissions. Open this repo in Claude Code to try them.
+# Welcome 👋
 
-## Directory structure
+**New to AI coding tools? You're in exactly the right place.**
+
+You don't need any AI experience to use this repo. If you can open a terminal, you can follow along. Everything here is real and working: you can read it, run it, change it, and break it. Breaking things is how we learn.
+
+This repo is the companion to the **AI Assisted Engineering** sessions. The sessions explain the ideas; this repo lets you see them working in a real project.
+
+## What you'll learn
+
+By the end, you'll understand how to make an AI assistant work *your* way:
+
+- 🧠 **Skills:** teach Claude your team's way of doing things, once
+- 🤖 **Subagents:** hand focused jobs to specialist helpers
+- 🪝 **Hooks:** rules that always run, no matter what
+- 🔐 **Permissions:** decide what Claude may do, may ask about, or may never touch
+
+## Start in 5 minutes
+
+1. **Install Claude Code:** follow the [official setup guide](https://code.claude.com/docs/en/overview).
+2. **Get this repo:**
+   ```bash
+   git clone https://github.com/aishajv/ai-trainings.git
+   cd ai-trainings
+   ```
+3. **Start Claude Code** in the folder:
+   ```bash
+   claude
+   ```
+4. **Ask it anything.** Try these to get started:
+   ```text
+   What skills, agents, and hooks does this project have?
+   Explain the ticket-implementer agent in simple words.
+   What would happen if an agent tried to read the .env file?
+   ```
+
+That's it. You're learning by exploring. 🎉
+
+## Your learning path
+
+Go at your own pace. Each step builds on the one before.
+
+| Step | Learn | Look at | Try |
+|---|---|---|---|
+| 1 | **Project memory** | [`CLAUDE.md`](CLAUDE.md) | Ask Claude how to run the tests |
+| 2 | **Skills** | [`.claude/skills/`](.claude/skills/) | Open a `SKILL.md`; notice the `description` that decides when it loads |
+| 3 | **Subagents** | [`.claude/agents/`](.claude/agents/) | See how `skills:` preloads conventions into an agent |
+| 4 | **Hooks** | [`.claude/hooks/`](.claude/hooks/) | Read `run-tests-before-done.sh`: the implementer cannot finish until `make test` passes |
+| 5 | **Permissions** | [`.claude/settings.json`](.claude/settings.json) | Spot the three lists: `allow`, `ask`, `deny` |
+| 6 | **Putting it together** | [The PR factory](#the-pr-factory-flow) | Run `/build-tickets-from-feature` on a small idea |
+
+## What's inside
 
 ```
 ai-trainings/
 ├── CLAUDE.md                          project memory, loaded in every session
 └── .claude/
-    ├── settings.json                  permissions: allow, ask, deny
+    ├── settings.json                  permissions (allow, ask, deny) and hook wiring
     ├── skills/
     │   ├── python-fastapi-coding-conventions/
     │   ├── python-fastapi-test-conventions/
@@ -27,28 +83,48 @@ ai-trainings/
     │   ├── diff-reviewer.md           reviews one ticket's diff (read-only)
     │   └── test-runner.md             runs `make test`
     └── hooks/
-        ├── guard-test-runner.sh       blocks installs, deletes, pushes, network for test-runner
-        └── block-no-verify.sh         stops ticket-implementer skipping git hooks
+        └── run-tests-before-done.sh   runs make test when ticket-implementer finishes
 ```
-
-| Part | What it shows |
-|---|---|
-| `skills/` | Knowledge skills (conventions, architecture) and two orchestrator skills that start subagents |
-| `agents/` | Subagents with preloaded skills (`skills:`) and their own hooks (`hooks:`) in the frontmatter |
-| `hooks/` | Scripts that always run, whatever the agent decides |
-| `settings.json` | Permission rules: `deny` always wins, then `ask`, then `allow` |
 
 ## The PR factory flow
 
-Two orchestrator skills turn one feature into reviewed, tested pull requests:
+Two **orchestrator skills** talk to you and hand the focused work to **subagents**. One feature goes in; reviewed, tested pull requests come out.
 
-```
-build-tickets-from-feature            build-prs-from-tickets
-  agree the scope with you              pull the issues
-  ticket-drafter drafts tickets   ──►   ticket-implementer builds each ticket
-  you review them one by one            diff-reviewer reviews the diff
-  create the issues                     test-runner runs make test
-                                        ticket-implementer opens the PR
+```mermaid
+flowchart LR
+    F([💡 One feature]) --> A
+    subgraph A[build-tickets-from-feature]
+        direction TB
+        A1[Agree the scope with you] --> A2[ticket-drafter drafts tickets]
+        A2 --> A3[You review each ticket] --> A4[Issues created]
+    end
+    A --> B
+    subgraph B[build-prs-from-tickets]
+        direction TB
+        B1[ticket-implementer builds a ticket] --> B2[diff-reviewer checks it]
+        B2 --> B3[test-runner runs make test]
+        B3 --> B4[ticket-implementer opens the PR]
+        B2 -. fixes .-> B1
+        B3 -. fixes .-> B1
+    end
+    B --> P([✅ One PR per ticket])
 ```
 
-The same setup as an installable plugin: [feature-to-pr-factory in claude-everything](https://github.com/aishajv/claude-everything/tree/main/plugins/feature-to-pr-factory).
+## Words you'll hear
+
+| Word | In plain words |
+|---|---|
+| **Skill** | A note that teaches Claude how to do one thing. It loads only when it's useful. |
+| **Subagent** | A helper Claude starts for one focused job, with its own fresh context. |
+| **Orchestrator** | The skill that runs the show: talks to you and starts the subagents. |
+| **Hook** | A script that runs at a fixed moment, such as before a command. It always runs. |
+| **Permission** | A rule about what Claude may do without asking, must ask about, or may never do. |
+| **Worktree** | A separate copy of the repo, so helpers can work in parallel without collisions. |
+
+## Keep going
+
+- 📚 **Sessions:** follow along with the [AI Assisted Engineering sessions](https://claude.ai/artifact/RJ8dsCQrrkQUBzuwnMJszq).
+- 🧩 **Use it in your own projects:** the same setup comes as an installable plugin, [feature-to-pr-factory in claude-everything](https://github.com/aishajv/claude-everything/tree/main/plugins/feature-to-pr-factory).
+- 💬 **Questions or ideas?** [Open an issue](https://github.com/aishajv/ai-trainings/issues). There are no silly questions here.
+
+<p align="center"><sub>Built with curiosity, for curious people. Happy learning! ✨</sub></p>
