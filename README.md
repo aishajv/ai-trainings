@@ -86,6 +86,23 @@ ai-trainings/
         └── run-tests-before-done.sh   runs make test when ticket-implementer finishes
 ```
 
+## Where each concept lives
+
+Some concepts are whole folders; others are a single key inside a file. Open the file and find the key.
+
+| Concept | File | Look for | What it does |
+|---|---|---|---|
+| Project memory | [`CLAUDE.md`](CLAUDE.md) | the whole file | Facts Claude reads in every session |
+| Skill | [`.claude/skills/*/SKILL.md`](.claude/skills/) | `description:` | Decides when the skill loads |
+| Orchestrator skill | [`build-prs-from-tickets/SKILL.md`](.claude/skills/build-prs-from-tickets/SKILL.md) | "You are the orchestrator" | A skill that starts subagents and coordinates them |
+| Subagent | [`.claude/agents/*.md`](.claude/agents/) | `name:`, `tools:`, `model:` | A focused helper with its own tools and model |
+| Read-only agent | [`diff-reviewer.md`](.claude/agents/diff-reviewer.md) | `tools: Read, Grep, Glob` | No Bash, no Write: it can only read |
+| Preloaded skills | [`ticket-implementer.md`](.claude/agents/ticket-implementer.md) | `skills:` | Conventions injected when the agent starts |
+| Worktree isolation | [`ticket-implementer.md`](.claude/agents/ticket-implementer.md) | `isolation: worktree` | Its own copy of the repo, so agents never collide |
+| Stop hook | [`ticket-implementer.md`](.claude/agents/ticket-implementer.md) | `hooks:` → `Stop:` | Runs when the agent tries to finish |
+| Hook script | [`run-tests-before-done.sh`](.claude/hooks/run-tests-before-done.sh) | `exit 2` | Blocks finishing until `make test` passes |
+| Permissions | [`.claude/settings.json`](.claude/settings.json) | `allow`, `ask`, `deny` | What Claude may do, must ask about, or may never do |
+
 ## The PR factory flow
 
 Two **orchestrator skills** talk to you and hand the focused work to **subagents**. One feature goes in; reviewed, tested pull requests come out.
