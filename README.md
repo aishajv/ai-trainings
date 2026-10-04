@@ -66,7 +66,7 @@ Go at your own pace. Each step builds on the one before.
 ai-trainings/
 ├── CLAUDE.md                          project memory, loaded in every session
 └── .claude/
-    ├── settings.json                  permissions (allow, ask, deny) and hook wiring
+    ├── settings.json                  permissions: allow, ask, deny
     ├── skills/
     │   ├── python-fastapi-coding-conventions/
     │   ├── python-fastapi-test-conventions/
@@ -79,7 +79,7 @@ ai-trainings/
     │   └── build-prs-from-tickets/      orchestrator skill
     ├── agents/
     │   ├── ticket-drafter.md          drafts tickets (read-only)
-    │   ├── ticket-implementer.md      implements one ticket in its own worktree
+    │   ├── ticket-implementer.md      implements one ticket; its Stop hook runs the tests
     │   ├── diff-reviewer.md           reviews one ticket's diff (read-only)
     │   └── test-runner.md             runs `make test`
     └── hooks/

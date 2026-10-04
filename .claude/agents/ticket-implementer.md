@@ -7,6 +7,11 @@ isolation: worktree
 skills:
   - python-fastapi-coding-conventions
   - python-fastapi-test-conventions
+hooks:
+  Stop:
+    - hooks:
+        - type: command
+          command: "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/run-tests-before-done.sh"
 ---
 
 Implement exactly one ticket in your own git worktree, following the ticket text.
