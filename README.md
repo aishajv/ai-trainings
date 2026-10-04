@@ -107,26 +107,6 @@ Some concepts are whole folders; others are a single key inside a file. Open the
 
 Two **orchestrator skills** talk to you and hand the focused work to **subagents**. One feature goes in; reviewed, tested pull requests come out.
 
-```mermaid
-flowchart LR
-    F([💡 One feature]) --> A
-    subgraph A[build-tickets-from-feature]
-        direction TB
-        A1[Agree the scope with you] --> A2[ticket-drafter drafts tickets]
-        A2 --> A3[You review each ticket] --> A4[Issues created]
-    end
-    A --> B
-    subgraph B[build-prs-from-tickets]
-        direction TB
-        B1[ticket-implementer builds a ticket] --> B2[diff-reviewer checks it]
-        B2 --> B3[test-runner runs make test]
-        B3 --> B4[ticket-implementer opens the PR]
-        B2 -. fixes .-> B1
-        B3 -. fixes .-> B1
-    end
-    B --> P([✅ One PR per ticket])
-```
-
 ## Words you'll hear
 
 | Word | In plain words |
