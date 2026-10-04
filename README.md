@@ -106,6 +106,8 @@ Some concepts are whole folders; others are a single key inside a file. Open the
 
 Two **orchestrator skills** talk to you and hand the focused work to **subagents**. One feature goes in; reviewed, tested pull requests come out.
 
+<p align="center"><img src="assets/pr-factory-flow.svg" alt="Animated PR factory: a feature flows through ticket-drafter and issues, then ticket-implementer, diff-reviewer, and test-runner, with fixes looping back, and comes out as one PR per ticket" width="100%"></p>
+
 ## Words you'll hear
 
 | Word | In plain words |
