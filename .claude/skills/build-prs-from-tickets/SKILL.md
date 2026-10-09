@@ -7,7 +7,13 @@ description: Implement a planned scope of GitHub or GitLab issues with agents - 
 
 You are the orchestrator: you run in the user's session, start the agents, pass results between them, and report to the user. The agents do the work. You never push and never merge. Implement every ticket of one scope, with one PR or MR per ticket.
 
-Always start agents by their namespaced names (`ticket-implementer`, `diff-reviewer`, `test-runner`): a project may have its own agent with the same short name.
+## Agents
+
+| Agent | Model | Tools | Preloaded skills | Runs | Job |
+|---|---|---|---|---|---|
+| `ticket-implementer` | `sonnet` | Bash, Read, Write, Edit, Grep, Glob | python-fastapi-coding-conventions, python-fastapi-test-conventions | in its own git worktree | Implements one ticket and commits; pushes only when told. A Stop hook makes `make test` pass before it can finish |
+| `diff-reviewer` | `sonnet` | Read, Grep, Glob (read-only) | python-fastapi-coding-conventions, python-fastapi-test-conventions | on the worktree path you give it | Reviews one ticket's diff against the project's rules and the acceptance criteria |
+| `test-runner` | `haiku` | Bash, Read, Grep, Glob | python-fastapi-test-conventions | on the worktree path you give it | Runs the test suite in the ticket's worktree and reports the results |
 
 ## Phase 1: Load and Plan
 
