@@ -3,13 +3,13 @@
     "playwright": {
       "type": "stdio",
       "command": "node",
-      "args": ["mcp-spy.mjs", "npx", "@playwright/mcp@latest"],
+      "args": ["mcp/mcp-spy.mjs", "npx", "@playwright/mcp@latest"],
       "env": {}
     },
     "chrome-devtools": {
       "type": "stdio",
       "command": "node",
-      "args": ["mcp-spy.mjs", "npx", "-y", "chrome-devtools-mcp@latest"],
+      "args": ["mcp/mcp-spy.mjs", "npx", "-y", "chrome-devtools-mcp@latest"],
       "env": {}
     }
   }
