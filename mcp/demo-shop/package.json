@@ -1,0 +1,17 @@
+{
+  "name": "demo-shop",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0"
+  }
+}
