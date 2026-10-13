@@ -13,7 +13,11 @@ npx playwright install chromium
 npm run dev
 ```
 
-Open http://localhost:3000. It looks fine on a laptop; to see it break, open Chrome DevTools, press Cmd+Shift+M (Ctrl+Shift+M on Windows) and pick a phone.
+Open http://localhost:3000 in Chrome. It looks fine on a laptop. To see it break on a phone:
+
+1. Open DevTools: Cmd+Option+I (Ctrl+Shift+I on Windows).
+2. Click inside DevTools, then press Cmd+Shift+M (Ctrl+Shift+M on Windows) to turn on the device toolbar. Without DevTools focused, this shortcut opens Chrome's profile menu instead.
+3. Pick an iPhone in the Dimensions menu, or set 375 × 812.
 
 ## Run the Playwright tests
 
