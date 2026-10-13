@@ -30,14 +30,13 @@ Five tests, no AI involved. They all fail until the bugs are fixed.
 
 ## Watch Claude find the bugs with MCP
 
-With the shop running, start Claude Code in `mcp/` and approve the `playwright` and `chrome-devtools` servers when asked:
+With the shop running, open a second terminal, start Claude Code from the repo root, and approve the `playwright` and `chrome-devtools` servers when asked:
 
 ```bash
-cd mcp
 claude
 ```
 
-In a second terminal, from the repo root, watch every MCP message as it happens:
+In a third terminal, from the repo root, watch every MCP message as it happens:
 
 ```bash
 tail -F mcp/mcp-wire.log
