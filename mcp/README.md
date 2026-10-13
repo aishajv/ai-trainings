@@ -2,7 +2,7 @@
 
 Demo Shop is broken on purpose. It is a small Next.js shop page with UI and logic bugs, built so you can watch Claude find and fix them through a real browser with MCP, and see how MCP works under the hood. The code is messy, and that is not the point: the point is to get a hang of MCP.
 
-The walkthrough is in [AI Assisted Engineering, Session 3](https://claude.ai/artifact/RJ8dsCQrrkQUBzuwnMJszq#session-3).
+The walkthrough is in [AI Assisted Engineering, Session 3](https://claude.ai/artifact/RJ8dsCQrrkQUBzuwnMJszq#session-3). The [Demo Shop design](https://claude.ai/artifact/KFnTFXZoRS1ejCAvSasL48) shows what the page should look like next to what shipped.
 
 ## Run the shop locally
 
