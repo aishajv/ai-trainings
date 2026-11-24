@@ -74,7 +74,7 @@ def signed_in() -> bool:
 def _provider(interactive: bool) -> OAuthClientProvider:
     async def redirect(url: str) -> None:
         if not interactive:
-            raise NotSignedIn("Atlassian sign-in needed: run `poetry run python atlassian.py login` in oncall/")
+            raise NotSignedIn("Atlassian sign-in needed: run `poetry run python atlassian.py login` in mcp-oncall-demo/")
         print(f"Opening your browser to sign in to Atlassian:\n{url}\n")
         webbrowser.open(url)
 

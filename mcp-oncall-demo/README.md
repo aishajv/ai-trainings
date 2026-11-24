@@ -41,7 +41,7 @@ Claude Code ──▶ oncall MCP server ──▶ services.yaml          (owner)
 Requires Python 3.12, Poetry and the Vercel CLI signed in (`vercel login`).
 
 ```bash
-cd oncall
+cd mcp-oncall-demo
 poetry install
 poetry run python atlassian.py login   # once: opens the browser to sign in to Atlassian
 poetry run python server.py            # leave this terminal open: it is the live call log
@@ -50,7 +50,7 @@ poetry run python server.py            # leave this terminal open: it is the liv
 The server listens on `http://127.0.0.1:8900/mcp`; `.mcp.json` at the repo root registers it as
 `oncall`. Restart Claude Code (or `/mcp` → reconnect) after starting it.
 
-Secrets go in `oncall/.env` without pasting them anywhere:
+Secrets go in `mcp-oncall-demo/.env` without pasting them anywhere:
 
 ```bash
 bash -c 'read -s -p "Vercel token: " t; echo; echo "VERCEL_TOKEN=$t" >> .env'
