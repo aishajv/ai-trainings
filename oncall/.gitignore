@@ -1,0 +1,4 @@
+.env
+oncall.log
+__pycache__/
+.atlassian_tokens.json
