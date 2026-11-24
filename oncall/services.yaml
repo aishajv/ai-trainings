@@ -1,0 +1,18 @@
+# Service catalog: who owns what and how to reach them.
+# In a real company this lives in Backstage, PagerDuty or the Jira component lead.
+stillroom:
+  owner: Aisha
+  slack: "@aisha"
+  escalation: team lead
+  repo: github.com/aishajv/stillroom
+  hosting: Vercel project still-room-fre (team solo-tam)
+  live_url: https://still-room-fre.vercel.app
+  runbook: Confluence, space MFS, page "stillroom runbook"
+  vercel:
+    project: still-room-fre
+    team: solo-tam
+  confluence:
+    cloud_id: 36a2e413-c8ed-46cb-bd93-2b7c24fc49bc   # aishasworkspace-38642957
+    space: MFS
+    page_title: stillroom runbook
+  slack_channel: "#oncall"
