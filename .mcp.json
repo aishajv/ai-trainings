@@ -4,7 +4,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "mcp/mcp-spy.mjs",
+        "mcp-shop-demo/mcp-spy.mjs",
         "npx",
         "@playwright/mcp@latest"
       ],
@@ -14,7 +14,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "mcp/mcp-spy.mjs",
+        "mcp-shop-demo/mcp-spy.mjs",
         "npx",
         "-y",
         "chrome-devtools-mcp@latest"
