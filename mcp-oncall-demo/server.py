@@ -164,7 +164,7 @@ def get_recent_deploys(service: str, limit: int = 5) -> list[dict]:
         params={"projectId": cfg["project"], "slug": cfg["team"], "limit": min(limit, 20)},
     )
     if response.status_code in (401, 403):
-        raise ToolError("Vercel rejected the token. Check VERCEL_TOKEN in oncall/.env.")
+        raise ToolError("Vercel rejected the token. Check VERCEL_TOKEN in mcp-oncall-demo/.env.")
     response.raise_for_status()
 
     deploys = []
@@ -288,7 +288,7 @@ async def get_runbook(service: str, symptom: str) -> str:
     """
     cfg = _service(service)["confluence"]
     if not atlassian.signed_in():
-        raise ToolError("Atlassian sign-in needed: run `poetry run python atlassian.py login` in oncall/.")
+        raise ToolError("Atlassian sign-in needed: run `poetry run python atlassian.py login` in mcp-oncall-demo/.")
     cql = f'title = "{cfg["page_title"]}" AND space = "{cfg["space"]}" AND type = page'
     found = await _atlassian("searchConfluenceUsingCql", {"cloudId": cfg["cloud_id"], "cql": cql})
     ids = re.findall(r'"id"\s*:\s*"?(\d+)"?', found)
@@ -326,7 +326,7 @@ def post_to_slack(service: str, text: str) -> dict:
     channel = _service(service).get("slack_channel", "#oncall")
     url = os.environ.get("SLACK_WEBHOOK_URL")
     if not url:
-        raise ToolError("SLACK_WEBHOOK_URL is not set in oncall/.env.")
+        raise ToolError("SLACK_WEBHOOK_URL is not set in mcp-oncall-demo/.env.")
     response = httpx.post(url, json={"text": text}, timeout=10)
     _log_step(f"POST hooks.slack.com (webhook for {channel})", str(response.status_code))
     if response.status_code != 200:
