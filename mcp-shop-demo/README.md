@@ -2,14 +2,14 @@
 
 Demo Shop is broken on purpose. It is a small Next.js shop page with UI and logic bugs, built so you can watch Claude find and fix them through a real browser with MCP, and see how MCP works under the hood. The code is messy, and that is not the point: the point is to get a hang of MCP.
 
-Fixing the bugs is the exercise, so go ahead and fix them, by hand or with Claude. Just don't commit the fixes: the next person needs the shop broken. `git restore mcp/demo-shop` puts the bugs back.
+Fixing the bugs is the exercise, so go ahead and fix them, by hand or with Claude. Just don't commit the fixes: the next person needs the shop broken. `git restore mcp-shop-demo/demo-shop` puts the bugs back.
 
 The walkthrough is in [AI Assisted Engineering, Session 3](https://claude.ai/artifact/RJ8dsCQrrkQUBzuwnMJszq#session-3). The [Demo Shop design](https://claude.ai/artifact/KFnTFXZoRS1ejCAvSasL48) shows what the page should look like next to what shipped.
 
 ## Run the shop locally
 
 ```bash
-cd mcp/demo-shop
+cd mcp-shop-demo/demo-shop
 npm install
 npx playwright install chromium
 npm run dev
@@ -24,7 +24,7 @@ Open http://localhost:3000 in Chrome. It looks fine on a laptop. To see it break
 ## Run the Playwright tests
 
 ```bash
-cd mcp/demo-shop
+cd mcp-shop-demo/demo-shop
 npm test
 ```
 
@@ -38,12 +38,12 @@ With the shop running, open a second terminal, start Claude Code from the repo r
 claude
 ```
 
-Start it from the repo root, not `mcp/demo-shop`. From any other folder the servers fail with `CONNECTION_CLOSED` and nothing reaches the log.
+Start it from the repo root, not `mcp-shop-demo/demo-shop`. From any other folder the servers fail with `CONNECTION_CLOSED` and nothing reaches the log.
 
 In a third terminal, from the repo root, watch every MCP message as it happens:
 
 ```bash
-tail -F mcp/mcp-wire.log
+tail -F mcp-shop-demo/mcp-wire.log
 ```
 
 Then ask Claude:
@@ -61,5 +61,5 @@ Fix everything you found. Then check the page again at 375 by 812 and run npm te
 When you are done, put the bugs back for the next person, from the repo root:
 
 ```bash
-git restore mcp/demo-shop
+git restore mcp-shop-demo/demo-shop
 ```

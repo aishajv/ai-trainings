@@ -1,6 +1,6 @@
 // Sits between Claude Code and an MCP server and logs every message.
-// Used in the repo root .mcp.json, e.g. "command": "node", "args": ["mcp/mcp-spy.mjs", "npx", "@playwright/mcp@latest"]
-// Watch it from the repo root: tail -F mcp/mcp-wire.log
+// Used in the repo root .mcp.json, e.g. "command": "node", "args": ["mcp-shop-demo/mcp-spy.mjs", "npx", "@playwright/mcp@latest"]
+// Watch it from the repo root: tail -F mcp-shop-demo/mcp-wire.log
 
 import { spawn } from 'node:child_process';
 import { appendFileSync } from 'node:fs';
